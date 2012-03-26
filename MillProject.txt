@@ -1,0 +1,19 @@
+﻿Application Features
+
+
+1. Editor- JText Area
+2. Machine Status- Jeditor Pane supports embedded components and icons
+3. Menu Options
+4. Shortcut keys-keyevent,key listener
+
+
+
+
+Application Graphics for Simulation
+1. Single Run
+2. Step by step
+3. xy ,xz,yz planes
+4. 3D block
+5. different plane cuts?
+6. dimensioning inch,meters 
+7. timing for pauses “breaks” on code
