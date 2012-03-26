@@ -1,7 +1,7 @@
 ﻿Application Features
 
 
-1. Editor- JText Area
+1. Editor- JText Area/ Jeditor Pane with Editor Kit
 2. Machine Status- Jeditor Pane supports embedded components and icons
 3. Menu Options
 4. Shortcut keys-keyevent,key listener
