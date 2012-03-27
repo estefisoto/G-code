@@ -13,7 +13,7 @@ Application Graphics for Simulation
 1. Single Run
 2. Step by step
 3. xy ,xz,yz planes
-4. 3D block
+4. 3D block - using 2d graphics?
 5. different plane cuts?
 6. dimensioning inch,meters 
 7. timing for pauses “breaks” on code
