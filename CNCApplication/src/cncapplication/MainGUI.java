@@ -6,6 +6,7 @@
 package cncapplication;
 
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -29,10 +30,9 @@ public class MainGUI extends JFrame implements ActionListener {
     //Plane Container
     private Container planeC;
     private Container main;
-    private Plane xy;
-    private Plane yz;
-    private Plane xz;
-    private MachineStatus ms=new MachineStatus(600,0);
+    private Plane xy, yz, xz, threeD;
+    private Tool tool;
+    private MachineStatus ms = new MachineStatus(600,0);
     
     public MainGUI() 
     {
@@ -40,16 +40,17 @@ public class MainGUI extends JFrame implements ActionListener {
         
        
         add(ms);
-        xy=new Plane(50,75);
-        yz=new Plane(350,350);
-        xz=new Plane(50,350);        
-        
-        planeC=new Container();
-        main=new Container();
-        
+        tool = new Tool(0, 0, 50, 20, 2);
+        xy = new XYPlane(tool);
+        yz = new YZPlane(tool);
+        xz = new XZPlane(tool);        
+        threeD = new ThreeDimPlane(tool);
+        planeC = new Container();
+        main = new Container();
         
         planeC.setSize(1000,700);
         
+        planeC.setLayout(new GridLayout(2,2));
         planeC.add(xy);
         planeC.add(yz);
         planeC.add(xz);
@@ -64,7 +65,7 @@ public class MainGUI extends JFrame implements ActionListener {
         open.addActionListener(this);
         setMenuBar(bar);
                
-         addComponentListener(new ComponentListener() {
+        addComponentListener(new ComponentListener() {
 
             @Override
             public void componentResized(ComponentEvent ce) {
@@ -87,7 +88,7 @@ public class MainGUI extends JFrame implements ActionListener {
             }
         
      
-    });
+        });
       
         pack();
         setVisible(true);
