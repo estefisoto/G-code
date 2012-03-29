@@ -5,11 +5,15 @@
 
 package cncapplication;
 
+import java.awt.Container;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,10 +26,35 @@ public class MainGUI extends JFrame implements ActionListener {
 
     private Menu file;
     private MenuItem open;
+    //Plane Container
+    private Container planeC;
+    private Container main;
+    private Plane xy;
+    private Plane yz;
+    private Plane xz;
+    
     
     public MainGUI() 
     {
         super("");
+        
+       
+        
+        xy=new Plane(50,75);
+        yz=new Plane(500,400);
+        xz=new Plane(50,400);        
+        
+        planeC=new Container();
+        main=new Container();
+        
+        
+        planeC.setSize(750,700);
+        
+        planeC.add(xy);
+        planeC.add(yz);
+        planeC.add(xz);
+        main.add(planeC);
+        add(main);
         addWindowListener(new closeWindow());
         MenuBar bar = new MenuBar();
         file = new Menu("File");
@@ -34,9 +63,38 @@ public class MainGUI extends JFrame implements ActionListener {
         file.add(open);
         open.addActionListener(this);
         setMenuBar(bar);
+               
+         addComponentListener(new ComponentListener() {
 
+            @Override
+            public void componentResized(ComponentEvent ce) {
+                
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent ce) {
+               
+            }
+
+            @Override
+            public void componentShown(ComponentEvent ce) {
+                setSize(planeC.getSize());
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent ce) {
+               
+            }
+        
+     
+    });
+      
         pack();
         setVisible(true);
+         
+        
+      
+        
     }
 
     @Override
