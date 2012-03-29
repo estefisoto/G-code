@@ -32,23 +32,23 @@ public class MainGUI extends JFrame implements ActionListener {
     private Plane xy;
     private Plane yz;
     private Plane xz;
-    
+    private MachineStatus ms=new MachineStatus(600,0);
     
     public MainGUI() 
     {
         super("");
         
        
-        
+        add(ms);
         xy=new Plane(50,75);
-        yz=new Plane(500,400);
-        xz=new Plane(50,400);        
+        yz=new Plane(350,350);
+        xz=new Plane(50,350);        
         
         planeC=new Container();
         main=new Container();
         
         
-        planeC.setSize(750,700);
+        planeC.setSize(1000,700);
         
         planeC.add(xy);
         planeC.add(yz);
