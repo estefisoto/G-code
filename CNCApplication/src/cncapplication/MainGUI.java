@@ -44,7 +44,7 @@ public class MainGUI extends JFrame implements ActionListener {
         xy = new XYPlane(tool);
         yz = new YZPlane(tool);
         xz = new XZPlane(tool);        
-        threeD = new ThreeDimPlane(tool);
+        threeD = new ThreeDPlane(tool);
         planeC = new Container();
         main = new Container();
         
@@ -92,10 +92,6 @@ public class MainGUI extends JFrame implements ActionListener {
       
         pack();
         setVisible(true);
-         
-        
-      
-        
     }
 
     @Override
