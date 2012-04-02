@@ -5,6 +5,7 @@
 
 package cncapplication;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Menu;
@@ -26,7 +27,7 @@ import javax.swing.JFrame;
 public class MainGUI extends JFrame implements ActionListener {
 
     private Menu file;
-    private MenuItem open;
+    private MenuItem open, test;
     //Plane Container
     private Container planeC;
     private Container main;
@@ -37,34 +38,35 @@ public class MainGUI extends JFrame implements ActionListener {
     public MainGUI() 
     {
         super("");
-        
-       
         add(ms);
         tool = new Tool(0, 0, 50, 20, 2);
         xy = new XYPlane(tool);
         yz = new YZPlane(tool);
         xz = new XZPlane(tool);        
-        threeD = new ThreeDPlane(tool);
+        //threeD = new ThreeDPlane(tool);
         planeC = new Container();
         main = new Container();
         
-        planeC.setSize(1000,700);
-        
+        planeC.setSize(600, 600);
         planeC.setLayout(new GridLayout(2,2));
         planeC.add(xy);
         planeC.add(yz);
         planeC.add(xz);
+        
         main.add(planeC);
         add(main);
         addWindowListener(new closeWindow());
         MenuBar bar = new MenuBar();
         file = new Menu("File");
         bar.add(file);
+        test = new MenuItem("TEST");
         open = new MenuItem("Open");
+        
+        file.add(test);
         file.add(open);
         open.addActionListener(this);
+        test.addActionListener(this);
         setMenuBar(bar);
-               
         addComponentListener(new ComponentListener() {
 
             @Override
@@ -92,10 +94,18 @@ public class MainGUI extends JFrame implements ActionListener {
       
         pack();
         setVisible(true);
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getActionCommand().equals(test.getActionCommand()))
+        {
+            xy.makeCut(100, 100, 0);
+            System.out.println("HELLO");
+        }
+        
         if(e.getActionCommand().equals(open.getActionCommand()))
         {
             //New file chooser

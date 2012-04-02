@@ -11,10 +11,10 @@ import java.awt.Graphics;
  *
  * @author mwaldron74
  */
-public class ThreeDPlane extends Plane{
+public class ThreeDPlane{
     public ThreeDPlane(Tool tool)
     {
-        super(tool);
+        //super(tool);
     }
     public void paint(Graphics g)
     {

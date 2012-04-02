@@ -16,8 +16,10 @@ import java.awt.Rectangle;
  */
 public abstract class Plane extends Canvas {
     Tool tool;
+    public boolean relative;
     public Plane(Tool tool)
     {    
+        this.relative = true;
         this.tool = tool;
         setSize(240, 240);
     }
@@ -29,9 +31,9 @@ public abstract class Plane extends Canvas {
     
     public abstract void paint(Graphics g);
     
-    public abstract void makeCut();
+    public abstract void makeCut(int x, int y, int z);
     
-    public abstract void animate();
+    public abstract void animate(int x, int y, int z);
   
     @Override
     public void update(Graphics g) {

@@ -5,6 +5,7 @@
 
 package cncapplication;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -15,22 +16,29 @@ public class YZPlane extends Plane{
     public YZPlane(Tool tool)
     {
         super(tool);
+        setSize(300, 300);
     }
 
     @Override
     public void paint(Graphics g)
     {
-        
+        Color c = g.getColor();
+        g.setColor(Color.white);
+        g.fillRect(20, 70, 200, 100);
+        g.setColor(Color.black);
+        g.drawLine(20, 70, 20, 170);
+        g.drawLine(20, 170, 220, 170);
+        g.setColor(c);
     }
     
-    @Override
-    public void makeCut()
+    
+    public void makeCut(int x, int y, int z)
     {
         
     }
     
-    @Override
-    public void animate()
+    
+    public void animate(int x, int y, int z)
     {
         
     }
