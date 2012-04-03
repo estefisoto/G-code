@@ -15,7 +15,7 @@ public class CNCApplication {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MainGUI window = new MainGUI();
+       MillGUI mill = new MillGUI();
     }
 
 }

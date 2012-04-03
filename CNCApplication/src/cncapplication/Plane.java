@@ -15,25 +15,18 @@ import java.awt.Rectangle;
  * @author estefisoto
  */
 public abstract class Plane extends Canvas {
-    Tool tool;
+    
+    Mill mill;
     public boolean relative;
-    public Plane(Tool tool)
+    
+    public Plane(Mill mill)
     {    
         this.relative = true;
-        this.tool = tool;
+        this.mill = mill;
         setSize(240, 240);
     }
     
-    public void toolChange(Tool tool)
-    {
-        this.tool = tool;
-    }
-    
     public abstract void paint(Graphics g);
-    
-    public abstract void makeCut(int x, int y, int z);
-    
-    public abstract void animate(int x, int y, int z);
   
     @Override
     public void update(Graphics g) {

@@ -11,22 +11,14 @@ import java.awt.Graphics;
  *
  * @author mwaldron74
  */
-public class ThreeDPlane{
-    public ThreeDPlane(Tool tool)
+public class ThreeDPlane extends Plane{
+    
+    public ThreeDPlane(Mill mill)
     {
-        //super(tool);
+        super(mill);
     }
+    
     public void paint(Graphics g)
-    {
-        
-    }
-    
-    public void makeCut()
-    {
-        
-    }
-    
-    public void animate()
     {
         
     }

@@ -13,9 +13,9 @@ import java.awt.Graphics;
  * @author mwaldron74
  */
 public class YZPlane extends Plane{
-    public YZPlane(Tool tool)
+    public YZPlane(Mill mill)
     {
-        super(tool);
+        super(mill);
         setSize(300, 300);
     }
 
@@ -29,17 +29,5 @@ public class YZPlane extends Plane{
         g.drawLine(20, 70, 20, 170);
         g.drawLine(20, 170, 220, 170);
         g.setColor(c);
-    }
-    
-    
-    public void makeCut(int x, int y, int z)
-    {
-        
-    }
-    
-    
-    public void animate(int x, int y, int z)
-    {
-        
     }
 }

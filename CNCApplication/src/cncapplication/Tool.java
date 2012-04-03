@@ -11,9 +11,9 @@ package cncapplication;
  */
 public class Tool {
     
-    private int x, y, z, diameter, height;
+    private float x, y, z, diameter, height;
     
-    public Tool(int x, int y, int z, int diameter, int height)
+    public Tool(float x, float y, float z, float diameter, float height)
     {
         this.x = x;
         this.y = y;
@@ -22,38 +22,43 @@ public class Tool {
         this.height = height;
     }
     
-    public int getX()
+    public float getX()
     {
-        return x;
+        return (int) x;
     }
     
-    public int getY()
+    public float getY()
     {
         return y;
     }
     
-    public int getZ()
+    public float getZ()
     {
         return z;
     }
     
-    public int getHeight()
+    public float getHeight()
     {
         return height;
     }
     
-    public int getDiameter()
+    public float getDiameter()
     {
         return diameter;
     }
     
-    public void setX(int x)
+    public void setX(float x)
     {
         this.x = x;
     }
     
-    public void setY(int y)
+    public void setY(float y)
     {
         this.y = y;
+    }
+    
+    public void setZ(float z)
+    {
+        this.z = z;
     }
 }

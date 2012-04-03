@@ -17,6 +17,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.ContainerListener;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -24,7 +25,7 @@ import javax.swing.JFrame;
  *
  * @author mwaldron74
  */
-public class MainGUI extends JFrame implements ActionListener {
+public class MillGUI extends JFrame implements ActionListener {
 
     private Menu file;
     private MenuItem open, test;
@@ -32,20 +33,28 @@ public class MainGUI extends JFrame implements ActionListener {
     private Container planeC;
     private Container main;
     private Plane xy, yz, xz, threeD;
-    private Tool tool;
-    private MachineStatus ms = new MachineStatus(600,0);
+    MachineStatus machineStatus;
+    private Mill mill;
+    private TimeStepper timestepper;
     
-    public MainGUI() 
+    public MillGUI() 
     {
-        super("");
-        add(ms);
-        tool = new Tool(0, 0, 50, 20, 2);
-        xy = new XYPlane(tool);
-        yz = new YZPlane(tool);
-        xz = new XZPlane(tool);        
-        //threeD = new ThreeDPlane(tool);
+        super("Mill Simulator");
+        mill = new Mill();
+        machineStatus = new MachineStatus(0, 600, mill);
+        add(machineStatus);
+        xy = new XYPlane(mill);
+        yz = new YZPlane(mill);
+        xz = new XZPlane(mill);        
+        threeD = new ThreeDPlane(mill);
         planeC = new Container();
         main = new Container();
+        ArrayList<Plane> planes = new ArrayList<Plane>();
+        planes.add(xy);
+        planes.add(xz);
+        planes.add(yz);
+        planes.add(machineStatus);
+        timestepper = new TimeStepper(planes, mill);
         
         planeC.setSize(600, 600);
         planeC.setLayout(new GridLayout(2,2));
@@ -102,7 +111,7 @@ public class MainGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(test.getActionCommand()))
         {
-            xy.makeCut(100, 100, 0);
+            //xy.makeCut(100, 100, 0);
             System.out.println("HELLO");
         }
         

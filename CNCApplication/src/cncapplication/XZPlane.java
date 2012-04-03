@@ -13,9 +13,9 @@ import java.awt.Graphics;
  * @author mwaldron74
  */
 public class XZPlane extends Plane{
-    public XZPlane(Tool tool)
+    public XZPlane(Mill mill)
     {
-        super(tool);
+        super(mill);
         setSize(300, 300);
     }
     
@@ -29,15 +29,5 @@ public class XZPlane extends Plane{
         g.drawLine(50, 100, 50, 200);
         g.drawLine(50, 200, 250, 200);
         g.setColor(c);
-    }
-    
-    public void makeCut(int x, int y, int z)
-    {
-        
-    }
-    
-    public void animate(int x, int y, int z)
-    {
-        
-    }    
+    }   
 }

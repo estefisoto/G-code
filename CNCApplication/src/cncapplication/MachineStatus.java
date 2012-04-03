@@ -15,28 +15,28 @@ import java.awt.image.BufferedImage;
  *
  * @author estefisoto
  */
-class MachineStatus extends Canvas{
+class MachineStatus extends Plane{
     
     
-    public String units, arcplane,pos, spindle;
-    public String clycle, cool1,cool2,opt_s,blk_s,clamps;
-    public String radius_comp,length_comp;
+    public String units, arcplane, pos, spindle;
+    public String clycle, cool1, cool2, opt_s, blk_s, clamps;
+    public String radius_comp, length_comp;
     public int sspeed;
     public double feedr;
     public BufferedImage img;
     
     
-    public MachineStatus(int x, int y)
+    public MachineStatus(int x, int y, Mill mill)
     {
+       super(mill);
        setSize(500,700);
        this.setLocation(x, y);
        img = new BufferedImage(70,70, BufferedImage.TYPE_INT_RGB);
        Graphics g = img.createGraphics();
        g.setColor(Color.WHITE);
        g.fillRect(0, 0, img.getWidth(), img.getHeight());  
-       
-    
     }
+    
     @Override
     public void paint(Graphics g)
     {
