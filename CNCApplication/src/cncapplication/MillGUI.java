@@ -41,26 +41,26 @@ public class MillGUI extends JFrame implements ActionListener {
     {
         super("Mill Simulator");
         mill = new Mill();
-        machineStatus = new MachineStatus(0, 600, mill);
-        add(machineStatus);
+        machineStatus = new MachineStatus(600, 0, mill);
         xy = new XYPlane(mill);
         yz = new YZPlane(mill);
         xz = new XZPlane(mill);        
         threeD = new ThreeDPlane(mill);
         planeC = new Container();
         main = new Container();
-        ArrayList<Plane> planes = new ArrayList<Plane>();
-        planes.add(xy);
-        planes.add(xz);
-        planes.add(yz);
-        planes.add(machineStatus);
-        timestepper = new TimeStepper(planes, mill);
+        main.add(machineStatus);
         
         planeC.setSize(600, 600);
         planeC.setLayout(new GridLayout(2,2));
         planeC.add(xy);
         planeC.add(yz);
         planeC.add(xz);
+        ArrayList<Plane> planes = new ArrayList<Plane>();
+        planes.add(xy);
+        planes.add(xz);
+        planes.add(yz);
+        planes.add(machineStatus);
+        timestepper = new TimeStepper(planes, mill);
         
         main.add(planeC);
         add(main);
@@ -80,12 +80,10 @@ public class MillGUI extends JFrame implements ActionListener {
 
             @Override
             public void componentResized(ComponentEvent ce) {
-                
             }
 
             @Override
             public void componentMoved(ComponentEvent ce) {
-               
             }
 
             @Override
@@ -94,16 +92,11 @@ public class MillGUI extends JFrame implements ActionListener {
             }
 
             @Override
-            public void componentHidden(ComponentEvent ce) {
-               
+            public void componentHidden(ComponentEvent ce) {  
             }
-        
-     
         });
-      
         pack();
         setVisible(true);
-        
     }
 
     @Override
@@ -111,8 +104,8 @@ public class MillGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(test.getActionCommand()))
         {
-            //xy.makeCut(100, 100, 0);
-            System.out.println("HELLO");
+            timestepper.start();
+            mill.moveToolRel(50, 40, 30);
         }
         
         if(e.getActionCommand().equals(open.getActionCommand()))

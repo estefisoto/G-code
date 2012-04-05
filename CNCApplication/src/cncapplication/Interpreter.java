@@ -24,14 +24,13 @@ public class Interpreter {
         this.file = file;
     }
 
-    public void run(){
+    public void run(){ 
         String line = new String();
         String[] gCode;
         Scanner scanner;
         try {
             scanner = new Scanner(file);
-            while (scanner.hasNextLine() && mill.running) {
-            mill.running=true;
+            while (scanner.hasNextLine()) {
             line = scanner.nextLine();
             gCode = line.split("  *");
             for (int i = 1; i < gCode.length; i++) {
@@ -67,8 +66,6 @@ public class Interpreter {
                 }
             }
         }
-            
-            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
         }

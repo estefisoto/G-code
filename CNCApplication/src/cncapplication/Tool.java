@@ -24,7 +24,7 @@ public class Tool {
     
     public float getX()
     {
-        return (int) x;
+        return x;
     }
     
     public float getY()

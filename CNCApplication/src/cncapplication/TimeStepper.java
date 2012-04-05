@@ -8,6 +8,7 @@ package cncapplication;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,21 +17,34 @@ import java.util.logging.Logger;
 public class TimeStepper extends Thread{
     private ArrayList<Plane> planes;
     private Mill mill;
-    private long timestep = 5;
+    private long timestep = 8;
+    
     public TimeStepper(ArrayList<Plane> planes, Mill mill)
     {
         this.planes = planes;
         this.mill = mill;
     }
     
-    public void timeStep()
+    public ArrayList<Plane> getPlanes()
     {
-        for(Plane plane : planes)
-            plane.repaint();
-        try {
-            sleep(timestep);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(("Thread exception")).log(Level.SEVERE, null, ex);
-        }
+        return planes;
+    }
+    
+    @Override
+    public void run()
+    {
+        while(mill.isRunning())
+        {
+            System.out.println("run");
+            mill.timeTick();
+            for(Plane p : planes)
+                p.repaint();
+            try {
+                sleep(timestep);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TimeStepper.class.getName()).log(Level.SEVERE, 
+                                 null, ex);
+            }
+        }     
     }
 }

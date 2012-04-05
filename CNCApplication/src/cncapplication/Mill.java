@@ -21,7 +21,8 @@ class Mill {
     public String cycle, cool1, cool2, opt_s, blk_s, clamps;
     public String radius_comp, length_comp, feedunits;
     public boolean relative, absolute,rapid,linear,running;
-    public int sspeed;
+    public int sspeed, timeTick, time;
+    public float moveX, moveY, moveZ, Xstep, Ystep, Zstep;
     public double feedr;
     public BufferedImage img;
     public Tool tool;
@@ -42,10 +43,18 @@ class Mill {
         arcplane="XY";
         //TO DO:spindle speeds and feedrates depends on tool type
         sspeed=1200;
-        
-        
-        
-        
+        units  = "";
+        arcplane = "";
+        pos = "";
+        spindle = "";
+        running = false;
+        timeTick = 100;
+        time = 0;
+    }
+    
+    public boolean isRunning()
+    {
+        return running;
     }
 
     public float getToolX() {
@@ -80,11 +89,30 @@ class Mill {
         tool.setZ(z);
     }
 
-    public void moveTool(float x, float y, float z) {
-        tool.setX(x);
-        tool.setY(y);
-        tool.setZ(z);
+    public void moveToolAbs(float x, float y, float z) {
+        
     }
+    
+    public void moveToolRel(float x, float y, float z) {
+        running = true;
+        Xstep = x / (float) timeTick;
+        Ystep = y / (float) timeTick;
+        Zstep = z / (float) timeTick;
+        time = timeTick;
+    }
+    
+    public void timeTick() {
+        System.out.println("timeTick");
+        if(time == 0)
+        {
+            running = false;
+            return;
+        }
+        tool.setX(Xstep + tool.getX());
+        tool.setY(Ystep + tool.getY());
+        tool.setZ(Zstep + tool.getZ());
+        time --;
+    }        
 
     public void setUnits(String s) {
         units=s;
@@ -134,12 +162,14 @@ class Mill {
     public void setFeedr(double d) {
         feedr=d;
     }
-     public void setRapid() {
+    
+    public void setRapid() {
         rapid=true;
     }
-     public void setLinear() {
+    
+    public void setLinear() {
         rapid=true;
     }
-
+     
 
 }
