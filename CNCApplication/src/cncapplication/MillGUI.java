@@ -117,25 +117,14 @@ public class MillGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(open.getActionCommand()))
         {
-            //New file chooser
+            
             final JFileChooser fc = new JFileChooser();
-            //New Dialog
-
-            //Set return val to Open file browse in frame
             int returnVal = fc.showOpenDialog(this);
-            //Declare string to hold line from file
-            String classPath = new String();
-            String className = new String();
-
-            //If a new file was selected from browser
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 //Set file equal to the sellected file
                 File file = fc.getSelectedFile();
-                classPath = fc.getCurrentDirectory().toString();
-                System.out.println(file);
-                System.out.println(classPath);
-
-                className = file.getName();
+                Interpreter interpret=new Interpreter(mill,file);
+                interpret.run();
             }
         }
     }
