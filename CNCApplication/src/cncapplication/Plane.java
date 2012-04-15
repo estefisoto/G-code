@@ -35,6 +35,7 @@ public abstract class Plane extends Canvas {
     }
     
     public abstract void paintTool(Graphics g);
+    public abstract void paintMoves(Graphics g);
     public abstract void paintCuts(Graphics g);
     
     @Override
@@ -52,8 +53,10 @@ public abstract class Plane extends Canvas {
         g.setColor(Color.black);
         g.drawLine(XStart, YStart - height, XStart, YStart);
         g.drawLine(XStart, YStart, XStart + width, YStart); 
-//Paint the cuts
+//Paint the Cuts
         paintCuts(g);
+//Paint the Moves
+        paintMoves(g);
 //Paint the Tool
         paintTool(g);
         g.setColor(c);

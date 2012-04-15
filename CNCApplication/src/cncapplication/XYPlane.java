@@ -35,9 +35,17 @@ public class XYPlane extends Plane{
                    (int) mill.getToolDiameter(), (int) mill.getToolDiameter());
     }
     
+    @Override
+    public void paintMoves(Graphics g)
+    {
+        for(Line l : mill.getMoves())
+            l.drawXY(g, XStart, YStart);
+    }
+    
+    @Override
     public void paintCuts(Graphics g)
     {
-        for(Shape s : mill.getXYCuts())
-            s.draw(g, XStart, YStart);
+        for(Cut c : mill.getCuts())
+            c.drawXY(g, XStart, YStart);
     }
 }

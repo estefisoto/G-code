@@ -70,7 +70,7 @@ public class MillGUI extends JFrame implements ActionListener {
         MenuBar bar = new MenuBar();
         file = new Menu("File");
         bar.add(file);
-        test = new MenuItem("TEST");
+        test = new MenuItem("Step");
         open = new MenuItem("Open");
         
         file.add(test);

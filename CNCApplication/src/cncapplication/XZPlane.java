@@ -32,9 +32,18 @@ public class XZPlane extends Plane{
                    YStart - (int) mill.getToolZ(), 
                    (int) mill.getToolDiameter(), (int) mill.getToolHeight());
     }
-
-    public void paintCuts(Graphics g) {
-        for(Shape s : mill.getXZCuts())
-            s.draw(g, XStart, YStart);
+    
+    @Override
+    public void paintMoves(Graphics g) 
+    {
+        for(Line l : mill.getMoves())
+            l.drawXZ(g, XStart, YStart);
+    }
+    
+    @Override
+    public void paintCuts(Graphics g)
+    {
+        for(Cut c : mill.getCuts())
+            c.drawXZ(g, XStart, YStart);
     }
 }

@@ -121,10 +121,10 @@ class Mill {
     public void timeTick() {
         if(time == 0)
         {
-            float X2 = tool.getX() - (Xstep * (timeTick - time));
-            float Y2 = tool.getY() - (Ystep * (timeTick - time));
-            float Z2 = tool.getZ() - (Zstep * (timeTick - time));
-            block.makeCut(tool.getX(), tool.getY(), tool.getZ(), X2, Y2, Z2);
+            float XStart = tool.getX() - (Xstep * (timeTick - time));
+            float YStart = tool.getY() - (Ystep * (timeTick - time));
+            float ZStart = tool.getZ() - (Zstep * (timeTick - time));
+            block.makeMove(XStart, YStart, ZStart, tool);
             if(!moveQueue.isEmpty())
             {
                 float[] move = moveQueue.get(0);
@@ -138,34 +138,30 @@ class Mill {
                 return;
             }
         }
-        block.removeLastCut();
-        float X2 = tool.getX() - (Xstep * (timeTick - time));
-        float Y2 = tool.getY() - (Ystep * (timeTick - time));
-        float Z2 = tool.getZ() - (Zstep * (timeTick - time));
-        block.makeCut(tool.getX(), tool.getY(), tool.getZ(), X2, Y2, Z2);
+        block.removeLastMove();
+        float XStart = tool.getX() - (Xstep * (timeTick - time));
+        float YStart = tool.getY() - (Ystep * (timeTick - time));
+        float ZStart = tool.getZ() - (Zstep * (timeTick - time));
+        block.makeMove(XStart, YStart, ZStart, tool);
         tool.setX(Xstep + tool.getX());
         tool.setY(Ystep + tool.getY());
         tool.setZ(Zstep + tool.getZ());
         time --;
     }        
     
-    public ArrayList<Shape> getXYCuts()
+    public ArrayList<Line> getMoves()
     {
-        return block.getXYCuts();
+        return block.getMoves();
     }
     
-    public ArrayList<Shape> getXZCuts()
+    public ArrayList<Cut> getCuts()
     {
-        return block.getXZCuts();
-    }
-    
-    public ArrayList<Shape> getYZCuts()
-    {
-        return block.getYZCuts();
+        return block.getCuts();
     }
 
-    public void setUnits(String s) {
-        units=s;
+    public void setUnits(String s) 
+    {
+        units = s;
     }
 
     public void setArcplane() {
