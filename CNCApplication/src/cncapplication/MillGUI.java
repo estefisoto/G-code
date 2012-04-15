@@ -18,6 +18,8 @@ import java.awt.event.ComponentListener;
 import java.awt.event.ContainerListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -36,6 +38,7 @@ public class MillGUI extends JFrame implements ActionListener {
     MachineStatus machineStatus;
     private Mill mill;
     private TimeStepper timestepper;
+    private ArrayList<Plane> planes;
     
     public MillGUI() 
     {
@@ -44,8 +47,7 @@ public class MillGUI extends JFrame implements ActionListener {
         machineStatus = new MachineStatus(600, 0, mill);
         xy = new XYPlane(mill);
         yz = new YZPlane(mill);
-        xz = new XZPlane(mill);        
-        threeD = new ThreeDPlane(mill);
+        xz = new XZPlane(mill);
         planeC = new Container();
         main = new Container();
         main.add(machineStatus);
@@ -55,12 +57,12 @@ public class MillGUI extends JFrame implements ActionListener {
         planeC.add(xy);
         planeC.add(yz);
         planeC.add(xz);
-        ArrayList<Plane> planes = new ArrayList<Plane>();
+        planes = new ArrayList<Plane>();
         planes.add(xy);
         planes.add(xz);
         planes.add(yz);
-        planes.add(machineStatus);
-        timestepper = new TimeStepper(planes, mill);
+        //TODO:
+        //planes.add(machineStatus);
         
         main.add(planeC);
         add(main);
@@ -104,8 +106,10 @@ public class MillGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(test.getActionCommand()))
         {
+            timestepper = new TimeStepper(planes, mill);
             timestepper.start();
-            mill.moveToolRel(50, 40, 30);
+            mill.moveToolRel(100, 80, -40);
+            mill.moveToolAbs(50, 50, 50);
         }
         
         if(e.getActionCommand().equals(open.getActionCommand()))

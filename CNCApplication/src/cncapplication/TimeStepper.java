@@ -35,7 +35,6 @@ public class TimeStepper extends Thread{
     {
         while(mill.isRunning())
         {
-            System.out.println("run");
             mill.timeTick();
             for(Plane p : planes)
                 p.repaint();

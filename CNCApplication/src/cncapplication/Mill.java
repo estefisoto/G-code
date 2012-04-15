@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,9 +27,12 @@ class Mill {
     public double feedr;
     public BufferedImage img;
     public Tool tool;
-
+    public ArrayList<float[]> moveQueue;
+    public ArrayList<Plane> planes;
+    public Block block;
     public Mill() {
-        tool = new Tool(0, 0, 50, 20, 2);
+        tool = new Tool(0, 0, 100, 20, 20);
+        moveQueue = new ArrayList<float[]>();
         //TODO : set all constants to default
         //DEFAULTS
         cool1 = "OFF";
@@ -50,6 +54,7 @@ class Mill {
         running = false;
         timeTick = 100;
         time = 0;
+        block = new Block(2, 2, 2);
     }
     
     public boolean isRunning()
@@ -90,29 +95,74 @@ class Mill {
     }
 
     public void moveToolAbs(float x, float y, float z) {
+        moveToolRel(x, 0, 0);
+        moveToolRel(0, y, 0);
+        moveToolRel(0, 0, z);
         
     }
     
     public void moveToolRel(float x, float y, float z) {
-        running = true;
-        Xstep = x / (float) timeTick;
-        Ystep = y / (float) timeTick;
-        Zstep = z / (float) timeTick;
-        time = timeTick;
+        if(running == false)
+        {
+            running = true;
+            Xstep = x / (float) timeTick;
+            Ystep = y / (float) timeTick;
+            Zstep = z / (float) timeTick;
+            time = timeTick;
+        } else {
+            float X = x / (float) timeTick;
+            float Y = y / (float) timeTick;
+            float Z = z / (float) timeTick;
+            float[] move = {X, Y, Z};
+            moveQueue.add(move);
+        }
     }
     
     public void timeTick() {
-        System.out.println("timeTick");
         if(time == 0)
         {
-            running = false;
-            return;
+            float X2 = tool.getX() - (Xstep * (timeTick - time));
+            float Y2 = tool.getY() - (Ystep * (timeTick - time));
+            float Z2 = tool.getZ() - (Zstep * (timeTick - time));
+            block.makeCut(tool.getX(), tool.getY(), tool.getZ(), X2, Y2, Z2);
+            if(!moveQueue.isEmpty())
+            {
+                float[] move = moveQueue.get(0);
+                Xstep = move[0];
+                Ystep = move[1];
+                Zstep = move[2];
+                time = timeTick;
+                moveQueue.remove(0);
+            } else {
+                running = false;
+                return;
+            }
         }
+        block.removeLastCut();
+        float X2 = tool.getX() - (Xstep * (timeTick - time));
+        float Y2 = tool.getY() - (Ystep * (timeTick - time));
+        float Z2 = tool.getZ() - (Zstep * (timeTick - time));
+        block.makeCut(tool.getX(), tool.getY(), tool.getZ(), X2, Y2, Z2);
         tool.setX(Xstep + tool.getX());
         tool.setY(Ystep + tool.getY());
         tool.setZ(Zstep + tool.getZ());
         time --;
     }        
+    
+    public ArrayList<Shape> getXYCuts()
+    {
+        return block.getXYCuts();
+    }
+    
+    public ArrayList<Shape> getXZCuts()
+    {
+        return block.getXZCuts();
+    }
+    
+    public ArrayList<Shape> getYZCuts()
+    {
+        return block.getYZCuts();
+    }
 
     public void setUnits(String s) {
         units=s;

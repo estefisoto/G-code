@@ -6,6 +6,7 @@
 package cncapplication;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -16,18 +17,24 @@ public class XZPlane extends Plane{
     public XZPlane(Mill mill)
     {
         super(mill);
-        setSize(300, 300);
+        width = 200;
+        height = 100;
+        axes1 = "X";
+        axes2 = "Z";
     }
     
     @Override
-    public void paint(Graphics g)
+    public void paintTool(Graphics g)
     {
-        Color c = g.getColor();
-        g.setColor(Color.white);
-        g.fillRect(50, 100, 200, 100);
-        g.setColor(Color.black);
-        g.drawLine(50, 100, 50, 200);
-        g.drawLine(50, 200, 250, 200);
-        g.setColor(c);
-    }   
+        g.setColor(Color.red);
+        int rad = ( (int) mill.getToolDiameter()) / 2;
+        g.fillRect(XStart + (int) mill.getToolX() - rad, 
+                   YStart - (int) mill.getToolZ(), 
+                   (int) mill.getToolDiameter(), (int) mill.getToolHeight());
+    }
+
+    public void paintCuts(Graphics g) {
+        for(Shape s : mill.getXZCuts())
+            s.draw(g, XStart, YStart);
+    }
 }

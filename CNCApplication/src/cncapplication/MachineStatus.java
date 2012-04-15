@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
  *
  * @author estefisoto
  */
-class MachineStatus extends Plane{
+class MachineStatus extends Canvas{
     
     
     public String units, arcplane, pos, spindle;
@@ -29,7 +29,7 @@ class MachineStatus extends Plane{
      
     public MachineStatus(int x, int y, Mill mill)
     {            
-       super(mill); 
+       super(); 
        this.mill=mill;
        setSize(500,700);
        this.setLocation(x, y);
