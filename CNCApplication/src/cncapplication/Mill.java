@@ -31,7 +31,7 @@ class Mill {
     public ArrayList<Plane> planes;
     public Block block;
     public Mill() {
-        tool = new Tool(0, 0, 100, 20, 20);
+        tool = new Tool(0, 0, 150, 20, 20);
         moveQueue = new ArrayList<float[]>();
         //TODO : set all constants to default
         //DEFAULTS
@@ -54,7 +54,7 @@ class Mill {
         running = false;
         timeTick = 100;
         time = 0;
-        block = new Block(2, 2, 2);
+        block = new Block(200, 200, 100);
     }
     
     public boolean isRunning()
@@ -105,6 +105,10 @@ class Mill {
         if(running == false)
         {
             running = true;
+            float max = x > y ? x : y;
+            max = max > z ? max : z;
+            timeTick = (int) max;
+            
             Xstep = x / (float) timeTick;
             Ystep = y / (float) timeTick;
             Zstep = z / (float) timeTick;
@@ -124,7 +128,7 @@ class Mill {
             float XStart = tool.getX() - (Xstep * (timeTick - time));
             float YStart = tool.getY() - (Ystep * (timeTick - time));
             float ZStart = tool.getZ() - (Zstep * (timeTick - time));
-            block.makeMove(XStart, YStart, ZStart, tool);
+            block.makeMove(XStart, YStart, ZStart, tool, block);
             if(!moveQueue.isEmpty())
             {
                 float[] move = moveQueue.get(0);
@@ -142,7 +146,7 @@ class Mill {
         float XStart = tool.getX() - (Xstep * (timeTick - time));
         float YStart = tool.getY() - (Ystep * (timeTick - time));
         float ZStart = tool.getZ() - (Zstep * (timeTick - time));
-        block.makeMove(XStart, YStart, ZStart, tool);
+        block.makeMove(XStart, YStart, ZStart, tool, block);
         tool.setX(Xstep + tool.getX());
         tool.setY(Ystep + tool.getY());
         tool.setZ(Zstep + tool.getZ());

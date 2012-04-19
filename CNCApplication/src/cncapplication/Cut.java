@@ -14,7 +14,7 @@ import java.awt.Graphics;
  */
 public class Cut {
     protected int x, y, z, diameter, height;
-    int bX, by, bz;
+    int bx, by, bz;
     public Cut(Tool t, Block b)
     {
         this.x = (int) t.getX();
@@ -22,7 +22,9 @@ public class Cut {
         this.z = (int) t.getZ();
         this.diameter = (int) t.getDiameter();
         this.height = (int) t.getHeight();
-        this.bX = b.getXSize();
+        this.bx = b.getXSize();
+        this.by = b.getYSize();
+        this.bz = b.getZSize();
     }
     public void drawXY(Graphics g, int xOffset, int yOffset)
     {

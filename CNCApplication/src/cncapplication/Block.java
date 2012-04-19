@@ -31,11 +31,16 @@ public class Block {
             moves.remove(moves.size() - 1);
     }
     
-    public void makeMove(float xStart, float yStart, float zStart, Tool tool)
+    public void makeMove(float xStart, float yStart, float zStart, Tool tool, Block block)
     {
         moves.add(new Line((int) xStart,(int) yStart, (int) zStart, 
                  (int) tool.getX(),(int) tool.getY(), (int) tool.getZ()));
-        cuts.add(new Cut(tool, this));
+        if(tool.getX() + (tool.getDiameter() / 2) > 0 && tool.getX() - (tool.getDiameter() / 2) < block.getXSize() &&
+           tool.getY() + (tool.getDiameter() / 2) > 0 && tool.getY() - (tool.getDiameter() / 2) < block.getYSize() &&
+           tool.getZ() > 0 && tool.getZ() - tool.getHeight() < block.getZSize())
+        {
+            cuts.add(new Cut(tool, this));
+        }
     }
     
     public ArrayList<Line> getMoves()

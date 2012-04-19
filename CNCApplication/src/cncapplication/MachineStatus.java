@@ -24,7 +24,7 @@ class MachineStatus extends Canvas{
     public String sspeed, feedr;
     public BufferedImage img;
     Mill mill;
-    private int y=150,x=10,x1=50;
+    private int y=150, x=10, x1=50;
     
      
     public MachineStatus(int x, int y, Mill mill)
@@ -98,7 +98,4 @@ class MachineStatus extends Canvas{
         g.drawString(mill.length_comp,x1,y);
         
     }
-    
-    
-    
 }

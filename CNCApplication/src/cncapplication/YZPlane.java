@@ -8,12 +8,13 @@ package cncapplication;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 /**
  *
  * @author mwaldron74
  */
-public class YZPlane extends Plane{
+public class YZPlane extends BlockPlane{
     
     public YZPlane(Mill mill)
     {
@@ -36,14 +37,16 @@ public class YZPlane extends Plane{
     
     @Override
     public void paintMoves(Graphics g) {
-        for(Line l : mill.getMoves())
-            l.drawYZ(g, XStart, YStart);
+        ArrayList<Line> moves = mill.getMoves();
+        for(int i  = 0; i < moves.size(); i++)
+            moves.get(i).drawYZ(g, XStart, YStart);
     }
     
     @Override
     public void paintCuts(Graphics g)
     {
-        for(Cut c : mill.getCuts())
-            c.drawYZ(g, XStart, YStart);
+        ArrayList<Cut> cuts = mill.getCuts();
+        for(int i = 0; i < cuts.size(); i++)
+            cuts.get(i).drawYZ(g, XStart, YStart);
     }
 }

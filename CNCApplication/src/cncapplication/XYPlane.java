@@ -8,6 +8,7 @@ package cncapplication;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author mwaldron74
  */
-public class XYPlane extends Plane{
+public class XYPlane extends BlockPlane{
     public XYPlane(Mill mill)
     {
         super(mill);
@@ -38,14 +39,16 @@ public class XYPlane extends Plane{
     @Override
     public void paintMoves(Graphics g)
     {
-        for(Line l : mill.getMoves())
-            l.drawXY(g, XStart, YStart);
+        ArrayList<Line> moves = mill.getMoves();
+        for(int i  = 0; i < moves.size(); i++)
+            moves.get(i).drawXY(g, XStart, YStart);
     }
     
     @Override
     public void paintCuts(Graphics g)
     {
-        for(Cut c : mill.getCuts())
-            c.drawXY(g, XStart, YStart);
+        ArrayList<Cut> cuts = mill.getCuts();
+        for(int i = 0; i < cuts.size(); i++)
+            cuts.get(i).drawXY(g, XStart, YStart);
     }
 }

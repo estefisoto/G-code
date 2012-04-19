@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author estefisoto
  */
-public abstract class BlockPlane extends Canvas {
+public abstract class BlockPlane extends Plane {
     protected final int XStart = 50;
     protected final int YStart = 250;
     protected int width;
@@ -24,13 +24,12 @@ public abstract class BlockPlane extends Canvas {
     protected String axes1;
     protected String axes2;
     private int textSize = 18;
-    Mill mill;
     public boolean relative;
     
     public BlockPlane(Mill mill)
     { 
+        super(mill);
         relative = true;
-        this.mill = mill;
         setSize(300, 300);
     }
     
