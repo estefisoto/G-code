@@ -21,6 +21,7 @@ class Mill {
     public String units, arcplane, pos, spindle;
     public String cycle, cool1, cool2, opt_s, blk_s, clamps;
     public String radius_comp, length_comp, feedunits;
+    public String currentLine;
     public boolean relative, absolute,rapid,linear,running;
     public int sspeed, timeTick, time;
     public float moveX, moveY, moveZ, Xstep, Ystep, Zstep;
@@ -35,6 +36,7 @@ class Mill {
         moveQueue = new ArrayList<float[]>();
         //TODO : set all constants to default
         //DEFAULTS
+        currentLine = "";
         cool1 = "OFF";
         cool2 = "OFF";
         radius_comp = "OFF";
@@ -173,6 +175,8 @@ class Mill {
 
     public void setPos(String s) {
         pos=s;
+        if(s == "ABS")
+            relative = false;
     }
 
     public void setSpindle() {
@@ -220,6 +224,14 @@ class Mill {
     public void setLinear() {
         rapid=true;
     }
-     
 
+    public void setCurrentLine(String current)
+    {
+        currentLine = current;
+    }
+
+    public String getCurrentLine()
+    {
+        return currentLine;
+    }
 }

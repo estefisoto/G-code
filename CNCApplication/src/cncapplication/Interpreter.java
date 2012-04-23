@@ -31,6 +31,7 @@ public class Interpreter {
     public void step(){
         
     }
+
     public void test(){
         timestepper  = new TimeStepper(planes, mill);
         timestepper.start();
@@ -40,6 +41,7 @@ public class Interpreter {
         }
         mill.moveToolAbs(-50, -10, -100);
     }
+
     public void run(){ 
         String line = new String();
         String[] gCode;
@@ -50,38 +52,55 @@ public class Interpreter {
                 line = scanner.nextLine();
                 gCode = line.split("  ");
                 for (int i = 1; i < gCode.length; i++) {
-                    if (gCode[i].equals("G70")) {
-                        mill.setUnits("INCH");
-                    }
-                    else if (gCode[i].equals("G90")) {
-                        mill.absolute=true;
-                        mill.setPos("ABS");
-                    }
-                    else if (gCode[i].equals("G0")) {
-                        //Rapid moves tool
-                        mill.setRapid();
-                    }
-                    else if (gCode[i].equals("X*")) {
-                        mill.tool.setX(Float.valueOf(gCode[i].substring(1)));
-                    }
-                    else if (gCode[i].equals("Y*")) {
-                        mill.tool.setY(Float.valueOf(gCode[i].substring(1)));
-                    }
-                    else if (gCode[i].equals("G1")) {
-                        //Linear makes cut
-                        mill.setLinear();
-                    }
-                    else if (gCode[i].equals("F10")) {
-                        mill.setFeedr(Double.valueOf(gCode[i].substring(1)));
-                    }
-                    else if (gCode[i].equals("M2")) {
-                        //End of program
-                        mill.running=false;
-                    }
+                    interpret(gCode);
                 }
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Interpreter.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void interpret(String[] commands)
+    {
+        for(int i = 0; i < commands.length; i++)
+        {
+            char x = commands[i].charAt(0);
+            switch(x)
+            {
+                case 'F':
+                case 'f':
+                break;
+                case 'G':
+                case 'g':
+                break;
+                case 'M':
+                case 'm':
+                break;
+                case 'N':
+                case 'n':
+                    mill.setCurrentLine(commands[i]);
+                break;
+                case 'X':
+                case 'x':
+                break;
+                case 'Y':
+                case 'y':
+                break;
+                case 'Z':
+                case 'z':
+                break;
+            }
+
+        }
+    }
+
+    private int G0(int index, String[] commands)
+    {
+        int X = 0, Y = 0, Z = 0;
+        while(index < commands.length)
+        {
+
+        }
+        return index;
     }
 }
