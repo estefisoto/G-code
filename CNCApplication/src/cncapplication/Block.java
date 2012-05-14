@@ -35,9 +35,9 @@ public class Block {
     {
         moves.add(new Line((int) xStart,(int) yStart, (int) zStart, 
                  (int) tool.getX(),(int) tool.getY(), (int) tool.getZ()));
-        if(tool.getX() + (tool.getDiameter() / 2) > 0 && tool.getX() - (tool.getDiameter() / 2) < block.getXSize() &&
-           tool.getY() + (tool.getDiameter() / 2) > 0 && tool.getY() - (tool.getDiameter() / 2) < block.getYSize() &&
-           tool.getZ() > 0 && tool.getZ() - tool.getHeight() < block.getZSize())
+        if(tool.getX() + (tool.getDiamX() / 2) > 0 && tool.getX() - (tool.getDiamX() / 2) < block.getXSize() &&
+           tool.getY() + (tool.getDiamY() / 2) > 0 && tool.getY() - (tool.getDiamY() / 2) < block.getYSize() &&
+           tool.getZ() < 0)
         {
             cuts.add(new Cut(tool, this));
         }

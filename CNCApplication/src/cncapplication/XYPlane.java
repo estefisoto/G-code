@@ -30,10 +30,11 @@ public class XYPlane extends BlockPlane{
     public void paintTool(Graphics g)
     {
         g.setColor(Color.red);
-        int rad = ( (int) mill.getToolDiameter()) / 2;
-        g.fillOval(XStart + (int) mill.getToolX() - rad, 
-                   YStart - (int) mill.getToolY() - rad, 
-                   (int) mill.getToolDiameter(), (int) mill.getToolDiameter());
+        int radX = ( (int) mill.getToolDiamX()) / 2;
+        int radY = ( (int) mill.getToolDiamY()) / 2;
+        g.fillOval(XStart + (int) mill.getToolX() - radX, 
+                   YStart - (int) mill.getToolY() - radY, 
+                   (int) mill.getToolDiamX(), (int) mill.getToolDiamY());
     }
     
     @Override
@@ -50,5 +51,16 @@ public class XYPlane extends BlockPlane{
         ArrayList<Cut> cuts = mill.getCuts();
         for(int i = 0; i < cuts.size(); i++)
             cuts.get(i).drawXY(g, XStart, YStart);
+    }
+    
+    @Override
+    public void paintAxes(Graphics g)
+    {
+        g.setColor(Color.black);
+        g.drawLine(XStart, YStart - height, XStart, YStart);
+        g.drawLine(XStart, YStart, XStart + width, YStart);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, textSize));
+        g.drawString(axes1, XStart + width + textSize, YStart);
+        g.drawString(axes2, XStart - textSize, YStart - height - textSize);
     }
 }

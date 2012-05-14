@@ -7,6 +7,7 @@ package cncapplication;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -45,6 +46,7 @@ public class MillGUI extends JFrame implements ActionListener {
     public MillGUI() 
     {
         super("Mill Simulator");
+        this.setMinimumSize(new Dimension(900, 650));
         mill = new Mill();
         interpreter = null;
         machineStatus = new MachineStatus(600, 0, mill);
@@ -53,9 +55,12 @@ public class MillGUI extends JFrame implements ActionListener {
         xz = new XZPlane(mill);
         planeC = new Container();
         main = new Container();
+        main.setSize(1100,700);
+        main.setPreferredSize(new Dimension(800, 650));
         main.add(machineStatus);
         
         planeC.setSize(600, 600);
+        planeC.setPreferredSize(new Dimension(600, 600));
         planeC.setLayout(new GridLayout(2,2));
         planeC.add(xy);
         planeC.add(yz);
@@ -64,8 +69,7 @@ public class MillGUI extends JFrame implements ActionListener {
         planes.add(xy);
         planes.add(xz);
         planes.add(yz);
-        //TODO:
-        //planes.add(machineStatus);
+        planes.add(machineStatus);
         
         main.add(planeC);
         add(main);
@@ -107,6 +111,7 @@ public class MillGUI extends JFrame implements ActionListener {
         });
         pack();
         setVisible(true);
+        
     }
 
     @Override
@@ -148,6 +153,20 @@ public class MillGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(open.getActionCommand()))
         {   
+            
+            String block = JOptionPane.showInputDialog("Please enter the block"
+                    + "size in inches\n X Y Z - Seperated by spaces");
+            String[] bArr = block.split(" ");
+            String tool = JOptionPane.showInputDialog("Please enter the tool"
+                    + "size in inches\n height radius - Seperated by spaces");
+            String[] tArr = tool.split(" ");
+            String toolLoc = JOptionPane.showInputDialog("Please enter the tool"
+                    + "location\n X Y Z - Seperated by spaces");
+            mill.setToolX(TOP_ALIGNMENT);
+            mill.setToolY(TOP_ALIGNMENT);
+            mill.setToolZ(4);
+            mill.setToolSize(TOP_ALIGNMENT, TOP_ALIGNMENT, TOP_ALIGNMENT);
+            String[] tlArr = toolLoc.split(" ");
             final JFileChooser fc = new JFileChooser();
             int returnVal = fc.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -155,6 +174,8 @@ public class MillGUI extends JFrame implements ActionListener {
                 File file = fc.getSelectedFile();
                 interpreter = new Interpreter(planes, mill, file);
             }
+            for(Plane p : this.planes)
+                p.repaint();
         }
     }
 }

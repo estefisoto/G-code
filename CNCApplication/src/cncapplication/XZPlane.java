@@ -28,10 +28,10 @@ public class XZPlane extends BlockPlane{
     public void paintTool(Graphics g)
     {
         g.setColor(Color.red);
-        int rad = ( (int) mill.getToolDiameter()) / 2;
-        g.fillRect(XStart + (int) mill.getToolX() - rad, 
-                   YStart - (int) mill.getToolZ(), 
-                   (int) mill.getToolDiameter(), (int) mill.getToolHeight());
+        int radX = ( (int) mill.getToolDiamX()) / 2;
+        g.fillRect(XStart + (int) mill.getToolX() - radX, 
+                   YStart - (int) mill.getToolZ() - (int) mill.getToolHeight() - height,
+                   (int) mill.getToolDiamX(), (int) mill.getToolHeight());
     }
     
     @Override
@@ -39,7 +39,7 @@ public class XZPlane extends BlockPlane{
     {
         ArrayList<Line> moves = mill.getMoves();
         for(int i  = 0; i < moves.size(); i++)
-            moves.get(i).drawXZ(g, XStart, YStart);
+            moves.get(i).drawXZ(g, XStart, YStart - height);
     }
     
     @Override
@@ -47,6 +47,17 @@ public class XZPlane extends BlockPlane{
     {
         ArrayList<Cut> cuts = mill.getCuts();
         for(int i = 0; i < cuts.size(); i++)
-            cuts.get(i).drawXZ(g, XStart, YStart);
+            cuts.get(i).drawXZ(g, XStart, YStart - height  - (int) mill.getToolHeight());
+    }
+    
+    @Override
+    public void paintAxes(Graphics g)
+    {
+        g.setColor(Color.black);
+        g.drawLine(XStart, YStart - height - 100, XStart, YStart - height);
+        g.drawLine(XStart, YStart - height, XStart + width, YStart - height);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, textSize));
+        g.drawString(axes1, XStart + width + textSize, YStart - height);
+        g.drawString(axes2, XStart - textSize, YStart - height * 2);
     }
 }

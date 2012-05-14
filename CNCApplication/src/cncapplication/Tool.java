@@ -11,14 +11,15 @@ package cncapplication;
  */
 public class Tool {
     
-    private float x, y, z, diameter, height;
+    private float x, y, z, diamX, diamY, height;
     
-    public Tool(float x, float y, float z, float diameter, float height)
+    public Tool(float x, float y, float z, float diamX, float diamY, float height)
     {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.diameter = diameter;
+        this.diamX = diamX;
+        this.diamY = diamY;
         this.height = height;
     }
     
@@ -42,9 +43,14 @@ public class Tool {
         return height;
     }
     
-    public float getDiameter()
+    public float getDiamX()
     {
-        return diameter;
+        return diamX;
+    }
+    
+    public float getDiamY()
+    {
+        return diamY;
     }
     
     public void setX(float x)

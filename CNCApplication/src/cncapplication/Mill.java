@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -31,8 +32,11 @@ class Mill {
     public ArrayList<float[]> moveQueue;
     public ArrayList<Plane> planes;
     public Block block;
-    public Mill() {
-        tool = new Tool(0, 0, 150, 20, 20);
+    public File file;
+    private boolean inches, metric;
+    public Mill() 
+    {
+        tool = new Tool(0, 0, 0, 20, 20, 20);
         moveQueue = new ArrayList<float[]>();
         //TODO : set all constants to default
         //DEFAULTS
@@ -48,15 +52,15 @@ class Mill {
         //Plane default G70=XY plane from documentation
         arcplane="XY";
         //TO DO:spindle speeds and feedrates depends on tool type
-        sspeed=1200;
-        units  = "";
-        arcplane = "";
-        pos = "";
         spindle = "";
+        sspeed=1200;
+        units  = "inches";
+        pos = "";
+        file = null;
         running = false;
         timeTick = 100;
         time = 0;
-        block = new Block(200, 200, 100);
+        block = new Block(200,200,100);
     }
     
     public boolean isRunning()
@@ -80,8 +84,12 @@ class Mill {
         return tool.getHeight();
     }
 
-    public float getToolDiameter() {
-        return tool.getDiameter();
+    public float getToolDiamX() {
+        return tool.getDiamX();
+    }
+    
+    public float getToolDiamY() {
+        return tool.getDiamY();
     }
 
     public void setToolX(float x) {
@@ -94,6 +102,10 @@ class Mill {
 
     public void setToolZ(float z) {
         tool.setZ(z);
+    }
+    
+    public void setToolSize(float diamX, float diamY, float height) {
+        
     }
 
     public void moveToolAbs(float x, float y, float z) {
@@ -165,11 +177,19 @@ class Mill {
         return block.getCuts();
     }
 
-    public void setUnits(String s) 
+    public void setAbsolute()
     {
-        units = s;
+        this.absolute = true;
+        this.relative = false;
+    }
+    
+    public void setInches()
+    {
+        this.inches = true;
+        this.metric = false;
     }
 
+    
     public void setArcplane() {
     }
 
