@@ -23,9 +23,9 @@ class Mill {
     public String cycle, cool1, cool2, opt_s, blk_s, clamps;
     public String radius_comp, length_comp, feedunits;
     public String currentLine;
-    public boolean relative, absolute,rapid,linear,running;
+    public boolean running;
     public int sspeed, timeTick, time;
-    public float moveX, moveY, moveZ, Xstep, Ystep, Zstep;
+    public float moveX, moveY, moveZ, Xstep, Ystep, Zstep, millToPixelMult;
     public double feedr;
     public BufferedImage img;
     public Tool tool;
@@ -52,15 +52,20 @@ class Mill {
         //Plane default G70=XY plane from documentation
         arcplane="XY";
         //TO DO:spindle speeds and feedrates depends on tool type
-        spindle = "";
+        spindle = "DW";
         sspeed=1200;
         units  = "inches";
-        pos = "";
+        pos = "REL";
         file = null;
         running = false;
         timeTick = 100;
         time = 0;
         block = new Block(200,200,100);
+    }
+    
+    public void setRealBlock(float x, float y, float z)
+    {
+        
     }
     
     public float getBlockX()
@@ -206,8 +211,7 @@ class Mill {
 
     public void setAbsolute()
     {
-        this.absolute = true;
-        this.relative = false;
+        this.pos = "ABS";
     }
     
     public void setInches()
@@ -221,9 +225,7 @@ class Mill {
     }
 
     public void setPos(String s) {
-        pos=s;
-        if(s == "ABS")
-            relative = false;
+        pos = s;
     }
 
     public void setSpindle() 
@@ -278,12 +280,12 @@ class Mill {
     
     public void setRapid() 
     {
-        rapid = true;
+        //rapid = true;
     }
     
     public void setLinear() 
     {
-        rapid = true;
+        //rapid = true;
     }
 
     public void setCurrentLine(String current)

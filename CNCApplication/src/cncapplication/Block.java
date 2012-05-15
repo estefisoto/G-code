@@ -16,6 +16,7 @@ public class Block {
     private ArrayList<Line> moves;
     private ArrayList<Cut> cuts;
     private int widthX, heightZ, lengthY;
+    public int blockRealx, blockRealy, blockRealz;
     public Block(int x, int y, int z)
     {
         widthX = x;

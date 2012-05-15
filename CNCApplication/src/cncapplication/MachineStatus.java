@@ -86,11 +86,17 @@ class MachineStatus extends Plane{
         g.drawString(mill.radius_comp,x1,410);
         g.drawString("Length Comp",x ,430);
         g.drawString(mill.length_comp,x1,430);
-        g.drawString("File",x ,450);
+        font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+        g.setFont(font);
+        g.setColor(Color.black);
+        g.drawString("Program Status", 80 ,470);
+        font = new Font(Font.SANS_SERIF, Font.BOLD, 14);
+        g.setFont(font);
+        g.drawString("File",x ,510);
         if(mill.file != null)
-            g.drawString(mill.file.getName(),x1,450);
-        g.drawString("Current Line",x ,470);
-        g.drawString("Block Size (in.)",x, 490);
-        g.drawString("Tool Size",x,510);
+            g.drawString(mill.file.getName(),x1,510);
+        g.drawString("Current Line",x ,530);
+        if(mill.getCurrentLine() != null)
+            g.drawString(mill.getCurrentLine(), x1, 530);
     }
 }

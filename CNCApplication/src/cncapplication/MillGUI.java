@@ -135,8 +135,8 @@ public class MillGUI extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, 
                                               "No file has been loaded");
             } else {
-                //TODO: check status.... if end of file send the message
-                interpreter.step();
+                if(!interpreter.step())
+                    JOptionPane.showMessageDialog(this, "Program has completed");
             }
         }
         
@@ -159,32 +159,36 @@ public class MillGUI extends JFrame implements ActionListener {
                     + "size in inches\n height radius - Seperated by spaces");
             String toolLoc = JOptionPane.showInputDialog("Please enter the tool"
                     + "location\n X Y Z - Seperated by spaces");
+            try {
+                String[] bArr = block.split(" ");
+                String[] tArr = tool.split(" ");
+                String[] tlArr = toolLoc.split(" ");
+                
+                if(bArr.length != 3 ||  tArr.length != 2 || tlArr.length != 3)
+                {
+                    JOptionPane.showMessageDialog(this, "Size input error");
+                    return;
+                }
+                
+                float blockXSize = Float.parseFloat(bArr[0]);
+                float blockYSize = Float.parseFloat(bArr[1]);
+                float blockZSize = Float.parseFloat(bArr[2]);
+                float toolHeight = Float.parseFloat(tArr[0]);
+                float toolDiamX = Float.parseFloat(tArr[1]) * 2;
+                float toolDiamY = Float.parseFloat(tArr[1]) * 2;
             
-            String[] bArr = block.split(" ");
-            String[] tArr = tool.split(" ");
-            String[] tlArr = toolLoc.split(" ");
-            
-            if(bArr.length != 3 ||  tArr.length != 2 || tlArr.length != 3)
-            {
+                mill.setToolX(Float.parseFloat(tlArr[0]));
+                mill.setToolY(Float.parseFloat(tlArr[1]));
+                mill.setToolZ(Float.parseFloat(tlArr[2]));
+                mill.setToolSize((toolDiamX * mill.getBlockX()) / blockXSize,
+                                 (toolDiamY * mill.getBlockY()) / blockYSize, 
+                                 (toolHeight * mill.getBlockZ()) / blockZSize);
+                for(Plane p : this.planes)
+                    p.repaint();
+            } catch(NullPointerException np) {
                 JOptionPane.showMessageDialog(this, "Size input error");
                 return;
             }
-            
-            float blockXSize = Float.parseFloat(bArr[0]);
-            float blockYSize = Float.parseFloat(bArr[1]);
-            float blockZSize = Float.parseFloat(bArr[2]);
-            float toolHeight = Float.parseFloat(tArr[0]);
-            float toolDiamX = Float.parseFloat(tArr[1]) * 2;
-            float toolDiamY = Float.parseFloat(tArr[1]) * 2;
-            
-            mill.setToolX(Float.parseFloat(tlArr[0]));
-            mill.setToolY(Float.parseFloat(tlArr[1]));
-            mill.setToolZ(Float.parseFloat(tlArr[2]));
-            mill.setToolSize((toolDiamX * mill.getBlockX()) / blockXSize,
-                             (toolDiamY * mill.getBlockY()) / blockYSize, 
-                             (toolHeight * mill.getBlockZ()) / blockZSize);
-            for(Plane p : this.planes)
-                p.repaint();
             
             final JFileChooser fc = new JFileChooser();
             int returnVal = fc.showOpenDialog(this);
