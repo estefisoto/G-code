@@ -24,7 +24,7 @@ class MachineStatus extends Plane{
     public String radius_comp, length_comp, feedunits;
     public String sspeed, feedr;
     public BufferedImage img;
-    private int yPadding = 18;
+    //private int yPadding = 18;
     Mill mill;
     private int y=150, x=20, x1=200;
     
@@ -48,9 +48,9 @@ class MachineStatus extends Plane{
         
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 16);
         g.setFont(font);
-        g.drawImage(img, 100,0,this);
+        //g.drawImage(img, 100,0,this);
         //Can be changed by G-Code - dynamic
-        g.drawString("Tooltype",25 ,100);        
+        //g.drawString("Tooltype",25 ,100);        
         font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
         g.setFont(font);
         g.setColor(Color.black);

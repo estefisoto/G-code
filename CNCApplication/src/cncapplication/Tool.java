@@ -53,6 +53,21 @@ public class Tool {
         return diamY;
     }
     
+    public void setDiamX(float dx)
+    {
+        this.diamX = dx;
+    }
+    
+    public void setDiamY(float dy)
+    {
+        this.diamY = dy;
+    }
+    
+    public void setHeight(float h)
+    {
+        this.height = h;
+    }
+    
     public void setX(float x)
     {
         this.x = x;

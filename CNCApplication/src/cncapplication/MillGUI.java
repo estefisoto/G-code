@@ -153,23 +153,43 @@ public class MillGUI extends JFrame implements ActionListener {
         
         if(e.getActionCommand().equals(open.getActionCommand()))
         {   
-            
             String block = JOptionPane.showInputDialog("Please enter the block"
                     + "size in inches\n X Y Z - Seperated by spaces");
-            String[] bArr = block.split(" ");
             String tool = JOptionPane.showInputDialog("Please enter the tool"
                     + "size in inches\n height radius - Seperated by spaces");
-            String[] tArr = tool.split(" ");
             String toolLoc = JOptionPane.showInputDialog("Please enter the tool"
                     + "location\n X Y Z - Seperated by spaces");
-            mill.setToolX(TOP_ALIGNMENT);
-            mill.setToolY(TOP_ALIGNMENT);
-            mill.setToolZ(4);
-            mill.setToolSize(TOP_ALIGNMENT, TOP_ALIGNMENT, TOP_ALIGNMENT);
+            
+            String[] bArr = block.split(" ");
+            String[] tArr = tool.split(" ");
             String[] tlArr = toolLoc.split(" ");
+            
+            if(bArr.length != 3 ||  tArr.length != 2 || tlArr.length != 3)
+            {
+                JOptionPane.showMessageDialog(this, "Size input error");
+                return;
+            }
+            
+            float blockXSize = Float.parseFloat(bArr[0]);
+            float blockYSize = Float.parseFloat(bArr[1]);
+            float blockZSize = Float.parseFloat(bArr[2]);
+            float toolHeight = Float.parseFloat(tArr[0]);
+            float toolDiamX = Float.parseFloat(tArr[1]) * 2;
+            float toolDiamY = Float.parseFloat(tArr[1]) * 2;
+            
+            mill.setToolX(Float.parseFloat(tlArr[0]));
+            mill.setToolY(Float.parseFloat(tlArr[1]));
+            mill.setToolZ(Float.parseFloat(tlArr[2]));
+            mill.setToolSize((toolDiamX * mill.getBlockX()) / blockXSize,
+                             (toolDiamY * mill.getBlockY()) / blockYSize, 
+                             (toolHeight * mill.getBlockZ()) / blockZSize);
+            for(Plane p : this.planes)
+                p.repaint();
+            
             final JFileChooser fc = new JFileChooser();
             int returnVal = fc.showOpenDialog(this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
+            if (returnVal == JFileChooser.APPROVE_OPTION) 
+            {
                 //Set file equal to the selected file
                 File file = fc.getSelectedFile();
                 interpreter = new Interpreter(planes, mill, file);

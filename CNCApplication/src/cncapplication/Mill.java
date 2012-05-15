@@ -63,59 +63,85 @@ class Mill {
         block = new Block(200,200,100);
     }
     
+    public float getBlockX()
+    {
+        return (float) block.getXSize();
+    }
+    
+    public float getBlockY()
+    {
+        return (float) block.getYSize();
+    }
+    
+    public float getBlockZ()
+    {
+        return (float) block.getZSize();
+    }
+    
     public boolean isRunning()
     {
         return running;
     }
 
-    public float getToolX() {
+    public float getToolX() 
+    {
         return (int) tool.getX();
     }
 
-    public float getToolY() {
+    public float getToolY() 
+    {
         return tool.getY();
     }
 
-    public float getToolZ() {
+    public float getToolZ() 
+    {
         return tool.getZ();
     }
 
-    public float getToolHeight() {
+    public float getToolHeight() 
+    {
         return tool.getHeight();
     }
 
-    public float getToolDiamX() {
+    public float getToolDiamX() 
+    {
         return tool.getDiamX();
     }
     
-    public float getToolDiamY() {
+    public float getToolDiamY() 
+    {
         return tool.getDiamY();
     }
 
-    public void setToolX(float x) {
+    public void setToolX(float x) 
+    {
         tool.setX(x);
     }
 
-    public void setToolY(float y) {
+    public void setToolY(float y) 
+    {
         tool.setY(y);
     }
 
-    public void setToolZ(float z) {
+    public void setToolZ(float z) 
+    {
         tool.setZ(z);
     }
     
-    public void setToolSize(float diamX, float diamY, float height) {
-        
+    public void setToolSize(float diamX, float diamY, float height) 
+    {
+        tool.setDiamX(diamX);
+        tool.setDiamY(diamY);
+        tool.setHeight(height);
     }
 
-    public void moveToolAbs(float x, float y, float z) {
-        moveToolRel(x, 0, 0);
-        moveToolRel(0, y, 0);
-        moveToolRel(0, 0, z);
-        
+    public void moveToolAbs(float x, float y, float z) 
+    {
+        moveToolRel(x - tool.getX(), y - tool.getY(), z - tool.getZ());
     }
     
-    public void moveToolRel(float x, float y, float z) {
+    public void moveToolRel(float x, float y, float z) 
+    {
         if(running == false)
         {
             running = true;
@@ -136,7 +162,8 @@ class Mill {
         }
     }
     
-    public void timeTick() {
+    public void timeTick() 
+    {
         if(time == 0)
         {
             float XStart = tool.getX() - (Xstep * (timeTick - time));
@@ -199,50 +226,64 @@ class Mill {
             relative = false;
     }
 
-    public void setSpindle() {
+    public void setSpindle() 
+    {
     }
 
-    public void setCycle() {
+    public void setCycle() 
+    {
     }
 
-    public void setCool1() {
+    public void setCool1() 
+    {
     }
 
-    public void setCool2() {
+    public void setCool2() 
+    {
     }
 
-    public void setOpt() {
+    public void setOpt() 
+    {
     }
 
-    public void setBlk() {
+    public void setBlk() 
+    {
     }
 
-    public void setClamps() {
+    public void setClamps() 
+    {
     }
 
-    public void setRadiusComp() {
+    public void setRadiusComp() 
+    {
     }
 
-    public void setLenComp() {
+    public void setLenComp() 
+    {
     }
 
-    public void setFeedUnits() {
+    public void setFeedUnits() 
+    {
     }
 
-    public void setSspeed(int i) {
-        sspeed=i;
+    public void setSspeed(int i) 
+    {
+        sspeed = i;
     }
 
-    public void setFeedr(double d) {
-        feedr=d;
+    public void setFeedr(double d) 
+    {
+        feedr = d;
     }
     
-    public void setRapid() {
-        rapid=true;
+    public void setRapid() 
+    {
+        rapid = true;
     }
     
-    public void setLinear() {
-        rapid=true;
+    public void setLinear() 
+    {
+        rapid = true;
     }
 
     public void setCurrentLine(String current)
