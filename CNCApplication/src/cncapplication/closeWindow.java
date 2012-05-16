@@ -9,7 +9,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- *
+ * closeWindow.java
+ * 
+ * This class serves as the closer for the user interface.  When 'x' is clicked,
+ * this closes the program.
+ * 
  * @author estefisoto
  */
 class closeWindow extends WindowAdapter {

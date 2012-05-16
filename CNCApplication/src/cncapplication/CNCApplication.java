@@ -6,7 +6,10 @@
 package cncapplication;
 
 /**
- *
+ * CNCApplication.java
+ * 
+ * Defines the entry point for the CNC application.
+ * 
  * @author mwaldron74
  */
 public class CNCApplication {

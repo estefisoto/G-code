@@ -8,16 +8,22 @@ package cncapplication;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 
 /**
- *
+ * TimeSetpper.java
+ * 
+ * TimeStepper is the class that serves as the controller in model view
+ * controller.  It is a thread that updates whenever the mill is running.  Each
+ * update is to the planes that are passed in.  The variable timestep serves as
+ * the delay in milliseconds between each update.
+ * 
  * @author mwaldron74
  */
-public class TimeStepper extends Thread{
+public class TimeStepper extends Thread
+{
     private ArrayList<Plane> planes;
     private Mill mill;
-    private long timestep = 8;
+    private long timestep = 6;
     
     public TimeStepper(ArrayList<Plane> planes, Mill mill)
     {

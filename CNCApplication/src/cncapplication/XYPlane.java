@@ -9,11 +9,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
+ * XYPlane.java
+ * 
+ * This serves as the XY Plane in the program.  It is the view of the block from
+ * on top.
+ * 
  * @author mwaldron74
  */
 public class XYPlane extends BlockPlane{

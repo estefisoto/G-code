@@ -9,11 +9,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ * Line.java
+ * 
+ * The line class holds the graphical representation for a line.  Each move is
+ * represented by a line, and a line can draw itself on any view of a block.
+ * (XY, YZ or XZ)
+ * 
  * @author mwaldron74
  */
 public class Line{
-    private int x1, y1, z1, x2, y2, z2;
+    public int x1, y1, z1, x2, y2, z2;
+    public Line(){}
     public Line(int x1, int y1, int z1, int x2, int y2, int z2)
     {
         this.x1 = x1;

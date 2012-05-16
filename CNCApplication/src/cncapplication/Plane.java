@@ -11,7 +11,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 /**
- *
+ * Plane.java
+ * 
+ * This is a drawing plane that points to a mill so that every time it is updated
+ * ,the information from the mill will be the most current information possible.
+ * It extends Canvas x and its subclasses are Blockplane and MachineStatus.
+ * 
  * @author mwaldron74
  */
 public abstract class Plane extends Canvas{
@@ -20,6 +25,7 @@ public abstract class Plane extends Canvas{
     {
         this.mill = mill;
     }
+    
     @Override
     public void update(Graphics g) 
     {

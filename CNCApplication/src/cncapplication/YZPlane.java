@@ -11,7 +11,11 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
- *
+ * YZPlane.java
+ * 
+ * This serves as the YZ Plane in the program.  It is the view of the block from
+ * on the side.
+ * 
  * @author mwaldron74
  */
 public class YZPlane extends BlockPlane{

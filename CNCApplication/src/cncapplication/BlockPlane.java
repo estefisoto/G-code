@@ -4,33 +4,33 @@
  */
 package cncapplication;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.util.ArrayList;
 
 /**
- *
- * @author estefisoto
+ * BlockPlane.java
+ * 
+ * This is an abstract class for a drawing plane that would contain a picture
+ * of a block.  Every BlockPlane has a picture of a 2d block so this class 
+ * contains the starting pixel of the x and y axis(pictured axis not necessarily
+ * the axis that the block represents), the width, the height and the size of
+ * the text to be drawn. The axes names will also be stored since the x and y
+ * axis represent the actual axes of the block. A block plane is able to draw
+ * the moves and cuts made on the block, the tool, and the actual block.
+ * 
+ * @author mwaldron74
  */
 public abstract class BlockPlane extends Plane {
-    protected int XStart = 50;
-    protected int YStart = 250;
-    protected int width;
-    protected int height;
-    protected String axes1;
-    protected String axes2;
-    protected int textSize = 18;
-    public boolean relative;
+    protected int XStart, YStart, width, height, textSize;
+    protected String axes1, axes2;
     
     public BlockPlane(Mill mill)
     { 
         super(mill);
-        relative = true;
+        XStart = 50;
+        YStart = 250;
+        textSize = 18;
         setSize(300, 300);
         setPreferredSize(new Dimension(300, 300));
     }
